@@ -1,0 +1,72 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+/* navbar color
+-------------------------------------------------- */
+/* to match peoples health */
+.navbar-inverse {
+    /*background-color: #8E2B2B;
+    border-color: #080808;*/
+
+    background-image: url('/assets/images/bk-ppheader.jpg');
+    background-repeat: repeat-x;
+    background-position: center top;
+}
+
+.navbar {
+    min-height: 70px;
+    margin-bottom: 20px;
+
+}
+
+
+.navbar-nav>li>a {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+#navbar li a {
+    color: black;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #AFD7DC;
+}
