@@ -20,43 +20,43 @@ $tables = Array (
         'userId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (userId)',
         'username' => 'char(10) NOT NULL ',
         'password' => 'text NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
 
     ),
     'userCategoryXref' => Array (
         'userCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (userCategoryId)',
         'userId' => 'int(10) NOT NULL ',
         'categoryId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'documentCategoryXref' => Array (
         'documentCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentCategoryId)',
         'documentId' => 'int(10) NOT NULL',
         'categoryId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'documentUserXref' => Array (
         'documentUserId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentCategoryId)',
         'documentId' => 'int(10) NOT NULL',
         'userId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'documentUserAccess' => Array (
         'documentUserAccessId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserAccessId)',
         'documentId' => 'int(10) NOT NULL',
         'userId' => 'int(10) NOT NULL',
-        'accessDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'accessDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'category' => Array (
         'categoryId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (categoryId)',
         'category' => 'char(50) NOT NULL',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'document' => Array (
         'documentId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (documentId)',
         'documentName' => 'char(50) NOT NULL',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;'
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     )
 );
 $data = Array (
