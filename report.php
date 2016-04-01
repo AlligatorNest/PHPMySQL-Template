@@ -123,7 +123,7 @@ $users = $db->get('tblusers');
         $user = $db->getOne ("tblusers");
         $username = $user['username'];
 
-        // get available documents for this userid
+        // get available documents for this userid assigned by Category
         $params = Array($userid,$userid);
         $q = "(
         SELECT DISTINCT d.documentName,d.documentId
@@ -137,7 +137,19 @@ $users = $db->get('tblusers');
         )";
         $documents = $db->rawQuery ($q, $params);
 
-        $downloadCount = $db->count;
+        // get available documents for this userid assigned by userid
+        $params = Array($userid,$userid);
+        $q = "(
+        SELECT DISTINCT d.documentName,d.documentId
+        FROM tblusers u
+        INNER JOIN tbldocumentuserxref dux on u.userId = dux.userId
+        INNER JOIN tbldocument d on dux.documentId = d.documentId
+        WHERE d.documentId not in (SELECT documentid from tbldocumentuseraccess where userID = ?) AND
+        u.userId = ?
+        )";
+        $userdocuments = $db->rawQuery ($q, $params);
+
+        $downloadCount += $db->count;
 
         if ($downloadCount > 0) {
           $msg =  $downloadCount . " new documents pending download for " . $username .".";
@@ -167,6 +179,12 @@ $users = $db->get('tblusers');
         foreach ($documents as $document){
           echo '<div class="row">';
           echo '<div class="col-xs-4">' .$document['documentName'] . '</div><div class="col-xs-8">Pending</div>';
+          echo '</div>';
+        }
+
+        foreach ($userdocuments as $userdocument){
+          echo '<div class="row">';
+          echo '<div class="col-xs-4">' .$userdocument['documentName'] . '</div><div class="col-xs-8">Pending</div>';
           echo '</div>';
         }
 

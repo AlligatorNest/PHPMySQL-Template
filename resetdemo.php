@@ -7,9 +7,9 @@ if(!$db) die("Database error");
 
 //delete all records from documentuseraccess table
 $db->rawQuery('DELETE FROM tbldocumentuseraccess');
+$db->rawQuery('DELETE FROM tbldocumentuserxref');
 $db->rawQuery('DELETE FROM tbldocumentcategoryxref WHERE adddate > "2016-03-27 15:49:36"');
 $db->rawQuery('DELETE FROM tbldocument WHERE adddate > "2016-03-27 15:49:36"');
-
 
 ?>
 <!DOCTYPE html>
