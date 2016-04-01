@@ -24,7 +24,7 @@ WHERE u.userId = ?
 )";
 $categories = $db->rawQuery ($q, $params);
 
-// get available documents for this userid
+// get available documents for this userid BY CATEGORY
 $params = Array($userid,$userid);
 $q = "(
 SELECT DISTINCT d.documentName,d.documentId
@@ -37,8 +37,22 @@ WHERE d.documentId not in (SELECT documentid from tbldocumentuseraccess where us
 u.userId = ?
 )";
 $documents = $db->rawQuery ($q, $params);
-
 $downloadCount = $db->count;
+
+// get available documents for this userid BY USERID
+// these are documents assigned to particular user
+$params = Array($userid,$userid);
+$q = "(
+SELECT DISTINCT d.documentName,d.documentId
+FROM tblusers u
+INNER JOIN tbldocumentuserxref dux on u.userId = dux.userId
+INNER JOIN tbldocument d on dux.documentId = d.documentId
+WHERE d.documentId not in (SELECT documentid from tbldocumentuseraccess where userID = ?) AND
+u.userId = ?
+)";
+$userdocuments = $db->rawQuery ($q, $params);
+
+$downloadCount += $db->count;
 
 if ($downloadCount > 0) {
   $msg = "You have " . $downloadCount . " new documents available for download!";
@@ -116,11 +130,26 @@ if ($downloadCount > 0) {
       </div>
 
       <p class="lead"><?php echo $msg?></p>
+      <p>Documents Specific to these Categories:</p>
+      <hr>
       <div class="container">
       <?php
       foreach ($documents as $document){
         echo '<div class="row">';
         echo '<div class="col-xs-4">' .$document['documentName'] . '</div><div class="col-xs-8">' . '<input id="' . $document['documentId'] . ',' . $userid . '" type="button" name="download" value="Download"> </div>';
+        echo '</div>';
+      }
+      ?>
+      </div>
+
+      <hr>
+      <p>Documents Specific to this User:</p>
+      <hr>
+      <div class="container">
+      <?php
+      foreach ($userdocuments as $userdocument){
+        echo '<div class="row">';
+        echo '<div class="col-xs-4">' .$userdocument['documentName'] . '</div><div class="col-xs-8">' . '<input id="' . $userdocument['documentId'] . ',' . $userid . '" type="button" name="download" value="Download"> </div>';
         echo '</div>';
       }
       ?>

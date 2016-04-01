@@ -36,7 +36,7 @@ $tables = Array (
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'documentUserXref' => Array (
-        'documentUserId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentCategoryId)',
+        'documentUserId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserId)',
         'documentId' => 'int(10) NOT NULL',
         'userId' => 'int(10) NOT NULL ',
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
