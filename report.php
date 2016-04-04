@@ -136,6 +136,7 @@ $users = $db->get('tblusers');
         u.userId = ?
         )";
         $documents = $db->rawQuery ($q, $params);
+        $downloadCount = $db->count;
 
         // get available documents for this userid assigned by userid
         $params = Array($userid,$userid);
