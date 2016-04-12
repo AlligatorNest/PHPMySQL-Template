@@ -1,64 +1,13 @@
 <?php
+require_once ("assets/includes/global.php");
 require_once ("assets/database/MysqliDb.php");
-error_reporting(E_ALL);
-$db = new Mysqlidb('localhost', 'root', '', 'documents');
-if(!$db) die("Database error");
+require_once ("assets/database/dbconnect.php");
 
 
-//delete all records from documentuseraccess table
-$db->rawQuery('DELETE FROM tbldocumentuseraccess');
-$db->rawQuery('DELETE FROM tbldocumentuserxref');
-$db->rawQuery('DELETE FROM tbldocumentcategoryxref WHERE adddate > "2016-03-27 15:49:36"');
-$db->rawQuery('DELETE FROM tbldocument WHERE adddate > "2016-03-27 15:49:36"');
-
+//html page header and menu
+require_once ("assets/includes/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Documatic</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/custom-css.css" rel="stylesheet">
-
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><img src="/assets/images/logo-ph1.png"></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="index.php">Provider View</a></li>
-            <li><a href="report.php">Admin: Reporting</a></li>
-            <li><a href="upload.php">Admin: Upload</a></li>
-            <li class="active"><a href="resetdemo.php">Reset Demo</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
 
     <!-- Begin page content -->
     <div class="container">
@@ -68,25 +17,198 @@ $db->rawQuery('DELETE FROM tbldocument WHERE adddate > "2016-03-27 15:49:36"');
 
       </div>
 
-      <p class="lead">Demo Reset: Document download history deleted.</p>
+<?php
+
+$prefix = 'tbl';
+
+$db = new Mysqlidb(Array (
+                'host' => 'localhost',
+                'username' => 'root',
+                'password' => '',
+                'db' => 'survey',
+                'prefix' => $prefix,
+                'charset' => null));
+if(!$db) die("Database error");
+$db->setTrace(true);
+$tables = Array (
+    'users' => Array (
+        'userId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (userId)',
+        'username' => 'char(10) NOT NULL ',
+        'password' => 'text NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+
+    ),
+    'userCategoryXref' => Array (
+        'userCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (userCategoryId)',
+        'userId' => 'int(10) NOT NULL ',
+        'categoryId' => 'int(10) NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'documentCategoryXref' => Array (
+        'documentCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentCategoryId)',
+        'documentId' => 'int(10) NOT NULL',
+        'categoryId' => 'int(10) NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'documentUserXref' => Array (
+        'documentUserId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserId)',
+        'documentId' => 'int(10) NOT NULL',
+        'userId' => 'int(10) NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'documentUserAccess' => Array (
+        'documentUserAccessId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserAccessId)',
+        'documentId' => 'int(10) NOT NULL',
+        'userId' => 'int(10) NOT NULL',
+        'accessDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'category' => Array (
+        'categoryId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (categoryId)',
+        'category' => 'char(50) NOT NULL',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'document' => Array (
+        'documentId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (documentId)',
+        'documentName' => 'char(50) NOT NULL',
+        'documentPath' => 'char(255) NULL',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    )
+);
+$data = Array (
+    'users' => Array (
+        Array ('username' => 'Dr. John',
+               'password' => 'John',
+               'adddate' => $db->now()
+        ),
+        Array ('username' => 'Dr. Bill',
+               'password' => 'Bill',
+               'adddate' => $db->now()
+        ),
+        Array ('username' => 'Dr. Eric',
+               'password' => 'Eric',
+               'adddate' => $db->now()
+        )
+    ),
+    'userCategoryXref' => Array (
+        Array ('userId' => 1,
+               'categoryId' => 1,
+               'adddate' => $db->now()
+        ),
+        Array ('userId' => 1,
+               'categoryId' => 2,
+               'adddate' => $db->now()
+        ),
+        Array ('userId' => 2,
+               'categoryId' => 1,
+               'adddate' => $db->now()
+        ),
+        Array ('userId' => 2,
+               'categoryId' => 3,
+               'adddate' => $db->now()
+        )
+    ),
+    'documentCategoryXref' => Array (
+        Array ( 'documentId' => 1,
+                'categoryId' => 1,
+                'adddate' => $db->now()
+        ),
+        Array ( 'documentId' => 2,
+                'categoryId' => 1,
+                'adddate' => $db->now()
+        ),
+        Array ( 'documentId' => 3,
+                'categoryId' => 1,
+                'adddate' => $db->now()
+        ),
+        Array ( 'documentId' => 4,
+                'categoryId' => 1,
+                'adddate' => $db->now()
+        )
+    ),
+    'category' => Array (
+        Array ( 'category' => 'General Prac',
+                'adddate' => $db->now()
+        ),
+        Array ( 'category' => 'Neurology',
+                'adddate' => $db->now()
+        ),
+        Array ( 'category' => 'Anesthesiology',
+                'adddate' => $db->now()
+        ),
+        Array ( 'category' => 'Dermatology',
+                'adddate' => $db->now()
+        )
+      ),
+      'document' => Array (
+          Array ( 'documentName' => 'Diet Guidlines',
+                  'adddate' => $db->now()
+          ),
+          Array ( 'documentName' => 'HIPPA Compliance 2016',
+                  'adddate' => $db->now()
+          ),
+          Array ( 'documentName' => 'Ethics Code',
+                  'adddate' => $db->now()
+          ),
+          Array ( 'documentName' => 'Diagnostic Codes 2016',
+                  'adddate' => $db->now()
+          )
+        )
+);
+function createTable ($name, $data) {
+    global $db;
+    $count = 0;
+    //$q = "CREATE TABLE $name (id INT(9) UNSIGNED PRIMARY KEY NOT NULL";
+    $db->rawQuery("DROP TABLE IF EXISTS $name");
+    //$q = "CREATE TABLE $name (id INT(9) UNSIGNED PRIMARY KEY AUTO_INCREMENT";
+    $q = "CREATE TABLE $name (";
+
+    foreach ($data as $k => $v) {
+        if ($count == 0) {
+          $q .= " $k $v";
+        } else {
+          $q .= ", $k $v";
+        };
+
+        $count ++;
+
+    }
+    $q .= ");";
+    echo $q . '<br>';
+    $db->rawQuery($q);
+}
+// rawQuery test
+foreach ($tables as $name => $fields) {
+    $db->rawQuery("DROP TABLE ".$prefix.$name);
+    createTable ($prefix.$name, $fields);
+}
+if (!$db->ping()) {
+    echo "db is not up";
+    exit;
+}
+
+// insert test with autoincrement
+
+foreach ($data as $name => $datas) {
+    foreach ($datas as $d) {
+        $id = $db->insert($name, $d);
+        if ($id)
+            $d['id'] = $id;
+        else {
+            echo "failed to insert: ".$db->getLastQuery() ."\n". $db->getLastError();
+            exit;
+        }
+    }
+}
 
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Peoples Health</p>
-      </div>
-    </footer>
+
+echo "<p class='lead'>All done: ";
+echo "Memory usage: ".memory_get_peak_usage()."</p>";
+ ?>
 
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
-
-  </body>
-</html>
+ <?php
+ //html page footer
+ require_once ("assets/includes/footer.php");
+ ?>
