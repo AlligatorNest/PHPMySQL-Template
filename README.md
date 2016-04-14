@@ -5,11 +5,9 @@ Step 1: Environment
 * create a virtual directory for project
 * create an empty database for project
 
-
-# Use code below to create a virtual directory.
+Use code below to create a virtual directory.
 Add code below to bottom of httpd.conf file in C:\Program Files\xampp\apache\conf
 ```
-
 Alias /sources "D:/sources"
 
 <Directory "D:/sources">
@@ -19,22 +17,23 @@ Alias /sources "D:/sources"
 	Allow from all
 	Require all granted
 </Directory>
-
 ```
 
 Step 2: Use Git Shell to clone project to local directory with this command
 ```
 cd to destination directory. Then
 git clone https://github.com/AlligatorNest/PHPMySQL-Template.git .
-```
+
 (Note period - include that.)
+```
 
 Step 3: Set database variables in 
 * localhost/assets/includes/global.php
-* resetdemo.php (Also define your database here)
 
+Step 4: Define database tables and seed data
+* resetdemo.php 
 
-Step 4: run localhost/resetdemo.php
+Step 5: run localhost/resetdemo.php
 * this will create and seed database. 
 * will drop / create / seed each time it is run.
 
