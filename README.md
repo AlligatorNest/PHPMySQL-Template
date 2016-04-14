@@ -9,6 +9,7 @@ Add code below to bottom of httpd.conf file in C:\Program Files\xampp\apache\con
 
 Alias /sources "D:/sources"
 
+```
 <Directory "D:/sources">
 	Options Indexes FollowSymLinks Includes ExecCGI
 	AllowOverride All
@@ -16,6 +17,7 @@ Alias /sources "D:/sources"
 	Allow from all
 	Require all granted
 </Directory>
+```
 
 
 # Use Git Shell to clone project to local directory with this command
