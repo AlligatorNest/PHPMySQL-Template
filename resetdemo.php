@@ -22,10 +22,10 @@ require_once ("assets/includes/header.php");
 $prefix = 'tbl';
 
 $db = new Mysqlidb(Array (
-                'host' => 'localhost',
-                'username' => 'root',
-                'password' => '',
-                'db' => 'survey',
+                'host' => $db_server,
+                'username' => $db_user,
+                'password' => $db_pass,
+                'db' => $db_name,
                 'prefix' => $prefix,
                 'charset' => null));
 if(!$db) die("Database error");
