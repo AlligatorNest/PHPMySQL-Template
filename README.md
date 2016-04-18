@@ -1,23 +1,24 @@
 # PHPMySQL-Template
-Project starter template
+Project starter template (using xampp and MySql)
 
 Step 1: Environment
-* create a virtual directory for project
+* create a directory for project. For example: c:/xampp/apps/newsite
 * create an empty database for project
 
 Use code below to create a virtual directory.
 Add code below to bottom of httpd.conf file in C:\Program Files\xampp\apache\conf
 ```
-Alias /sources "D:/sources"
+Alias /survey "C:/xampp/apps/survey"
 
-<Directory "D:/sources">
+<Directory "C:/xampp/apps/survey">
 	Options Indexes FollowSymLinks Includes ExecCGI
 	AllowOverride All
 	Order allow,deny
 	Allow from all
-	Require all granted
+  	Require all granted
 </Directory>
 ```
+Note: you will need to restart Apache after making this change
 
 Step 2: Use Git Shell to clone project to local directory with this command
 ```
