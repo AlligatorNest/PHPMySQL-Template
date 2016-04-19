@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <footer class="footer">
   <div class="container">
     <p class="text-muted">Peoples Health</p>
@@ -34,4 +33,3 @@
 
   </body>
 </html>
->>>>>>> origin/master

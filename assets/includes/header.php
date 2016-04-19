@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -116,4 +115,3 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
->>>>>>> origin/master
