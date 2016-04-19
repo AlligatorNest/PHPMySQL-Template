@@ -11,13 +11,13 @@
     <title><?php echo $pageTitle ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/assets/css/custom-css.css" rel="stylesheet">
+    <link href="assets/css/custom-css.css" rel="stylesheet">
 
     <!-- Jqueru -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -48,7 +48,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li <?=setActive("index")?>><a href="index.php">Provider View</a></li>
+            <li <?=setActive("index")?>><a href="index.php">Home</a></li>
             <li <?=setActive("report")?>><a href="report.php">Admin: Reporting</a></li>
             <li <?=setActive("upload")?>><a href="upload.php">Admin: Upload</a></li>
             <li <?=setActive("resetdemo")?>><a href="resetdemo.php">Reset Demo</a></li>

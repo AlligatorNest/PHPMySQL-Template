@@ -35,125 +35,196 @@ $tables = Array (
         'userId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (userId)',
         'username' => 'char(10) NOT NULL ',
         'password' => 'text NOT NULL ',
+        'isActive' => 'TINYINT NOT NULL ',
+        'email' => 'varchar(100) NULL ',
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
 
     ),
-    'userCategoryXref' => Array (
-        'userCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (userCategoryId)',
-        'userId' => 'int(10) NOT NULL ',
-        'categoryId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
-    ),
-    'documentCategoryXref' => Array (
-        'documentCategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentCategoryId)',
-        'documentId' => 'int(10) NOT NULL',
-        'categoryId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
-    ),
-    'documentUserXref' => Array (
-        'documentUserId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserId)',
-        'documentId' => 'int(10) NOT NULL',
-        'userId' => 'int(10) NOT NULL ',
-        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
-    ),
-    'documentUserAccess' => Array (
-        'documentUserAccessId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (documentUserAccessId)',
-        'documentId' => 'int(10) NOT NULL',
-        'userId' => 'int(10) NOT NULL',
-        'accessDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
+    'role' => Array (
+        'roleId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (roleId)',
+        'roleName' => 'varchar(50) NOT NULL ',
+        'isAdmin' => 'TINYINT NOT NULL ',
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
     'category' => Array (
-        'categoryId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (categoryId)',
-        'category' => 'char(50) NOT NULL',
+        'categoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (categoryId)',
+        'categoryName' => 'varchar(50) NOT NULL ',
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     ),
-    'document' => Array (
-        'documentId' => 'int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (documentId)',
-        'documentName' => 'char(50) NOT NULL',
-        'documentPath' => 'char(255) NULL',
+    'subcategory' => Array (
+        'subcategoryId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (subcategoryId)',
+        'subcategoryName' => 'varchar(50) NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'catSubcatXref' => Array (
+        'catSubcatXrefId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (catSubcatXrefId)',
+        'categoryId' => 'int(11) not null ',
+        'subcategoryId' => 'int(11) not null ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'ad' => Array (
+        'adId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (adId)',
+        'userID' => 'int(11) not null',
+        'adTitle' => 'varchar(50) NOT NULL ',
+        'adDescription' => 'text NOT NULL ',
+        'adImagePath' => 'varchar(255) NULL ',
+        'isActive' => 'TINYINT NOT NULL ',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'adCatXref' => Array (
+        'adCatXrefId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (adCatXrefId)',
+        'adId' => 'int(10) NOT NULL',
+        'catId' => 'int(10) NOT NULL',
+        'subCatId' => 'int(10) NOT NULL',
+        'accessDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    ),
+    'adviews' => Array (
+        'adViewId' => 'int(11) not null AUTO_INCREMENT, PRIMARY KEY (adViewId)',
+        'adId' => 'int(10) NOT NULL',
+        'viewDate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP',
         'adddate' => 'datetime NOT NULL DEFAULT CURRENT_TIMESTAMP'
     )
 );
 $data = Array (
     'users' => Array (
-        Array ('username' => 'Dr. John',
-               'password' => 'John',
-               'adddate' => $db->now()
-        ),
-        Array ('username' => 'Dr. Bill',
-               'password' => 'Bill',
-               'adddate' => $db->now()
-        ),
-        Array ('username' => 'Dr. Eric',
-               'password' => 'Eric',
+        Array ('username' => 'bryan',
+               'password' => 'bryan',
+               'isActive' => '1',
+               'email' => 'test@test.com',
                'adddate' => $db->now()
         )
     ),
-    'userCategoryXref' => Array (
-        Array ('userId' => 1,
-               'categoryId' => 1,
+    'role' => Array (
+        Array ('roleName' => 'admin',
+               'isAdmin' => '1',
                'adddate' => $db->now()
         ),
-        Array ('userId' => 1,
-               'categoryId' => 2,
+        Array ('roleName' => 'public',
+               'isAdmin' => '0',
                'adddate' => $db->now()
-        ),
-        Array ('userId' => 2,
-               'categoryId' => 1,
-               'adddate' => $db->now()
-        ),
-        Array ('userId' => 2,
-               'categoryId' => 3,
-               'adddate' => $db->now()
-        )
-    ),
-    'documentCategoryXref' => Array (
-        Array ( 'documentId' => 1,
-                'categoryId' => 1,
-                'adddate' => $db->now()
-        ),
-        Array ( 'documentId' => 2,
-                'categoryId' => 1,
-                'adddate' => $db->now()
-        ),
-        Array ( 'documentId' => 3,
-                'categoryId' => 1,
-                'adddate' => $db->now()
-        ),
-        Array ( 'documentId' => 4,
-                'categoryId' => 1,
-                'adddate' => $db->now()
         )
     ),
     'category' => Array (
-        Array ( 'category' => 'General Prac',
+        Array ( 'categoryName' => 'For Sale or For Free',
                 'adddate' => $db->now()
         ),
-        Array ( 'category' => 'Neurology',
+        Array ( 'categoryName' => 'Community',
                 'adddate' => $db->now()
         ),
-        Array ( 'category' => 'Anesthesiology',
+        Array ( 'categoryName' => 'Professional Services',
                 'adddate' => $db->now()
         ),
-        Array ( 'category' => 'Dermatology',
+        Array ( 'categoryName' => 'Real Estate and Housing',
+                'adddate' => $db->now()
+        ),
+        Array ( 'categoryName' => "I'm looking for",
+                'adddate' => $db->now()
+        )
+    ),
+    'subcategory' => Array (
+        Array ( 'subcategoryName' => 'Merchandise',
+                'adddate' => $db->now()
+        ),
+        Array ( 'subcategoryName' => 'Housing',
+                'adddate' => $db->now()
+        ),
+        Array ( 'subcategoryName' => 'Music',
+                'adddate' => $db->now()
+        ),
+        Array ( 'subcategoryName' => 'Clubs',
+                'adddate' => $db->now()
+        ),
+        Array ( 'subcategoryName' => 'Stuff',
                 'adddate' => $db->now()
         )
       ),
-      'document' => Array (
-          Array ( 'documentName' => 'Diet Guidlines',
+      'ad' => Array (
+          Array ( 'userID' => 1,
+                  'adTitle' => 'Tent for Sale',
+                  'adDescription' => 'Red tent. Zip door and windows',
+                  'isActive' => '1',
                   'adddate' => $db->now()
           ),
-          Array ( 'documentName' => 'HIPPA Compliance 2016',
+          Array ( 'userID' => 1,
+                  'adTitle' => 'House for Sale',
+                  'adDescription' => 'Red House. Located over yonder.',
+                  'isActive' => '1',
                   'adddate' => $db->now()
           ),
-          Array ( 'documentName' => 'Ethics Code',
+          Array ( 'userID' => 1,
+                  'adTitle' => 'DJ',
+                  'adDescription' => 'I will DJ your party.',
+                  'isActive' => '1',
                   'adddate' => $db->now()
           ),
-          Array ( 'documentName' => 'Diagnostic Codes 2016',
+          Array ( 'userID' => 1,
+                  'adTitle' => 'Meeting of the Knights Templar',
+                  'adDescription' => 'Rule the world from the shadows. Meet once a week.',
+                  'isActive' => '1',
+                  'adddate' => $db->now()
+          ) ,
+          Array ( 'userID' => 1,
+                  'adTitle' => 'Mardi Gras Beads',
+                  'adDescription' => 'Looking for old beads. Will pick up.',
+                  'isActive' => '1',
                   'adddate' => $db->now()
           )
-        )
+        ),
+        'adCatXref' => Array (
+            Array ( 'adId' => 1,
+                    'catId' => 1,
+                    'subCatId' => 1,
+                    'accessDate' => $db->now(),
+                    'adddate' => $db->now()
+            ),
+            Array ( 'adId' => 2,
+                    'catId' => 2,
+                    'subCatId' => 2,
+                    'accessDate' => $db->now(),
+                    'adddate' => $db->now()
+            ),
+            Array ( 'adId' => 2,
+                    'catId' => 3,
+                    'subCatId' => 3,
+                    'accessDate' => $db->now(),
+                    'adddate' => $db->now()
+            ),
+            Array ( 'adId' => 2,
+                    'catId' => 4,
+                    'subCatId' => 4,
+                    'accessDate' => $db->now(),
+                    'adddate' => $db->now()
+            ),
+            Array ( 'adId' => 2,
+                    'catId' => 5,
+                    'subCatId' => 5,
+                    'accessDate' => $db->now(),
+                    'adddate' => $db->now()
+            )
+          ),
+          'catSubcatXref' => Array (
+              Array ( 'categoryId' => 1,
+                      'subCategoryId' => 1,
+                      'adddate' => $db->now()
+              ),
+              Array ( 'categoryId' => 2,
+                      'subCategoryId' => 2,
+                      'adddate' => $db->now()
+              ),
+              Array ( 'categoryId' => 3,
+                      'subCategoryId' => 3,
+                      'adddate' => $db->now()
+              ),
+              Array ( 'categoryId' => 4,
+                      'subCategoryId' => 4,
+                      'adddate' => $db->now()
+              ),
+              Array ( 'categoryId' => 5,
+                      'subCategoryId' => 5,
+                      'adddate' => $db->now()
+              )
+            )
 );
 function createTable ($name, $data) {
     global $db;

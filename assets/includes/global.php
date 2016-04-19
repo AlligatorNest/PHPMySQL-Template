@@ -2,8 +2,8 @@
 /*******************
 * HTML Meta Tag Settings
 *******************/
-$pageTitle = "Survey";
-$appDescription = "Provider Survey";
+$pageTitle = "Classified";
+$appDescription = "Classified Ad";
 $appAuthor = "Bryan Davidson";
 
 /*******************
@@ -11,7 +11,7 @@ $appAuthor = "Bryan Davidson";
 *******************/
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'survey';
+$db_name = 'classified';
 $db_server = 'localhost';
 
 /*******************
