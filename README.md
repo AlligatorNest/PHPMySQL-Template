@@ -28,6 +28,15 @@ git clone https://github.com/AlligatorNest/PHPMySQL-Template.git .
 (Note period - include that.)
 ```
 
+Step 3: Publish new project to GitHub
+* use git hub desktop
+* select create
+* Specify Local Path
+* Give the repository a name
+* publish it using same name as above
+* use git hub desktop
+* Project now has a corresponding repository on Git Hub
+
 Step 3: Set database variables in 
 * localhost/assets/includes/global.php
 
