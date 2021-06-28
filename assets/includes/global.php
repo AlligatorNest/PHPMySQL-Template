@@ -9,8 +9,8 @@ $appAuthor = "Bryan Davidson";
 /*******************
 * Database Settings
 *******************/
-$db_user = 'root';
-$db_pass = '';
+$db_user = 'duhh';
+$db_pass = 'duhh';
 $db_name = 'classified';
 $db_server = 'localhost';
 
